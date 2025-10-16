@@ -3,7 +3,7 @@ title: set_input_delay/set_output_delay/set_max_delay傻傻分不清楚
 description: 《Static Timing Analysis for Nanometer Designs:A Practical Approach》的学习笔记
 author: Delta
 date: 2025-10-16 18:41:00 +0800
-categories: [笔记]
+categories: [笔记,数字IC前端]
 tags: [STA,SDC,读书笔记]
 pin: true
 math: true
