@@ -23,7 +23,7 @@ mermaid: true
 
 1. `set_input_delay`命令：用于约束外部寄存器经过组合逻辑输入到模块port的延时。
     
-    ![image.png](..\assets\posts\sdc_study\2025-10-16-set_x_delay\image.png)
+    ![image.png](../assets/posts/sdc_study/2025-10-16-set_x_delay/image.png)
     
 2. `set_output_delay`命令：用于约束模块输出信号到达下级模块的port的延时。
 3. `set_max_delay`命令：用于约束pin to pin之间的延时。
@@ -32,7 +32,7 @@ mermaid: true
 
 上面的定义可能不是这么好理解，我们用下面这张图说明。
 
-![image.png](..\assets\posts\sdc_study\2025-10-16-set_x_delay\image%201.png)
+![image.png](../assets/posts/sdc_study/2025-10-16-set_x_delay/image%201.png)
 
 `set_input_delay`约束了从外部Board Device A寄存器到模块输入port的延时，`set_output_delay`约束了模块输出port到外部Board Device B寄存器的延时。而对于对于PAD-PAD的纯组合逻辑，使用`set_max_delay`来约束。为什么这里需要set_max_delay来约束PAD-PAD的组合逻辑呢？
 
@@ -51,13 +51,13 @@ mermaid: true
 
 假设两个模块之间，由上级DFF输出，经过了一段组合逻辑到达下级模块的输入port，此时下级模块的input_delay应该怎么设？
 
-![image.png](..\assets\posts\sdc_study\2025-10-16-set_x_delay\image%202.png)
+![image.png](../assets/posts/sdc_study/2025-10-16-set_x_delay/image%202.png)
 
 假设Launch clock与Capture clock为同一个，此时希望满足的时序如下：
 
-setup：$T_{clk2q} + T_{c1} + T_{c2} + T_{setup}  \leq T+T_{skew}$
+setup：$T_{clk2q} + T_{c1} + T_{c2} + T_{setup}  /leq T+T_{skew}$
 
-hold：$T_{clk2q} + T_{c1} + T_{c2}  \geq T_{skew} + T_{hold}$
+hold：$T_{clk2q} + T_{c1} + T_{c2}  /geq T_{skew} + T_{hold}$
 
 因为UFF0和C1组合逻辑在模块的外部，这部分的延时需要`set_input_delay`命令约束。
 
@@ -69,7 +69,7 @@ hold：$T_{clk2q} + T_{c1} + T_{c2}  \geq T_{skew} + T_{hold}$
 
 假设两个模块之间，上级模块的输出port，在到达下级DFF的输入时，中间经过了一段组合逻辑。此时上级模块的output delay应该怎么设？
 
-![image.png](..\assets\posts\sdc_study\2025-10-16-set_x_delay\image%203.png)
+![image.png](../assets/posts/sdc_study/2025-10-16-set_x_delay/image%203.png)
 
 假设Launch clock与Capture clock为同一个，此时希望满足的时序如下：
 
